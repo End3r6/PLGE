@@ -1,4 +1,4 @@
-# PlaGeU
+# PLaGeU
 Plane Generation Stuff For Unity
 
 # ?
