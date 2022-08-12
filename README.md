@@ -9,6 +9,8 @@ I made this to solve a problem of water planes. Often, if I wanted a high res pl
 and then export the mesh to my unity project. This was tedious. So, I made a solution that would let me create a plane of any dimensions and resolution.
 
 # How To Use
+![HowTo Video](https://github.com/End3r6/PLaGeU/blob/master/HowTo.mp4)
+
 Download the project from the code green code button and drag the extracted folder into your unity assets folder. 
 Then, just attach the PLGE_PlaneGenerator script to an empty object. Then, enter your planes dimensions and resolution and click build plane.
 Last, Enjoy!
