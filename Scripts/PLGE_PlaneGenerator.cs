@@ -48,5 +48,7 @@ public class PLGE_PlaneGenerator : MonoBehaviour
         // Set the current mesh filter to use our generated mesh
         mesh.vertices = vertices;
         mesh.triangles = triangles;
+        
+        mesh.RecalculateNormals();
     }
 }
