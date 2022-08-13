@@ -45,15 +45,10 @@ public class PLGE_PlaneGenerator : MonoBehaviour
 			}
 		}
 
-        Vector3[] normals = new Vector3[vertices.Length];
-        for (int i = 0; i < normals.Length; i++)
-        {
-            normals[i] = -Vector3.forward;
-        }
-        
         // Set the current mesh filter to use our generated mesh
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        mesh.normals = normals;
+        
+        mesh.RecalculateNormals();
     }
 }
