@@ -25,11 +25,13 @@ public class PLGE_PlaneGenerator : MonoBehaviour
 		mesh.name = "PLGE_Plane";
 
         vertices = new Vector3[(numberOfFaces.x + 1) * (numberOfFaces.y + 1) * (meshResolution * meshResolution)];
+        Vector2[] uv = new Vector2[vertices.Length];
 		for (int i = 0, z = 0; z <= meshResolution; z++) 
         {
 			for (int x = 0; x <= meshResolution; x++, i++) 
             {
 				vertices[i] = (new Vector3(x * numberOfFaces.x, 0, z * numberOfFaces.y) / meshResolution) - new Vector3(numberOfFaces.x / 2, 0, numberOfFaces.y / 2);
+                uv[i] = new Vector2((float)x, (float)z) / meshResolution;
 			}
 		}
 
@@ -48,7 +50,8 @@ public class PLGE_PlaneGenerator : MonoBehaviour
         // Set the current mesh filter to use our generated mesh
         mesh.vertices = vertices;
         mesh.triangles = triangles;
-        
+        mesh.uv = uv;
+
         mesh.RecalculateNormals();
     }
 }
