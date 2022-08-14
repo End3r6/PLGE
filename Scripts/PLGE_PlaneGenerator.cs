@@ -29,7 +29,7 @@ public class PLGE_PlaneGenerator : MonoBehaviour
         {
 			for (int x = 0; x <= meshResolution; x++, i++) 
             {
-				vertices[i] = new Vector3((x * numberOfFaces.x), 0, z * numberOfFaces.y) / meshResolution;
+				vertices[i] = (new Vector3(x * numberOfFaces.x, 0, z * numberOfFaces.y) / meshResolution) - new Vector3(numberOfFaces.x / 2, 0, numberOfFaces.y / 2);
 			}
 		}
 
