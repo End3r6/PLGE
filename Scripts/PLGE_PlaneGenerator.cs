@@ -1,4 +1,3 @@
-using System.Diagnostics;
 using System.Collections;
 using System.Collections.Generic;
 using System;
@@ -9,6 +8,17 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class PLGE_PlaneGenerator : MonoBehaviour
 {
+    public enum MeshIndexFormat
+    {
+        SixteenBit,
+        ThirtyTwoBit
+    };
+
+    [Header("Mesh Options")]
+    public MeshIndexFormat indexFormat;
+
+    [Space(10)]
+
     [Header("Mesh Data")]
     [Tooltip("The Base Dimensions for the mesh")]
     public Vector2Int numberOfFaces = new Vector2Int(1, 1);
@@ -65,7 +75,7 @@ public class PLGE_PlaneGenerator : MonoBehaviour
 
             mesh.RecalculateNormals();
         }
-        catch(Exception e)
+        catch(OutOfMemoryException)
         {
             Debug.LogWarning("You are trying to create a mesh with more verticies than Unity allows on a single mesh\n"
             + "Consider spliting the mesh into chunks or changing the mesh index");
