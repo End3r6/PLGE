@@ -8,14 +8,18 @@ using UnityEngine;
 [RequireComponent(typeof(MeshFilter))]
 public class PLGE_PlaneGenerator : MonoBehaviour
 {
-    public enum MeshIndexFormat
-    {
-        SixteenBit,
-        ThirtyTwoBit
-    };
+    // public enum ChunkType
+    // {
+    //     Split,
+    //     Expand
+    // };
 
     [Header("Mesh Options")]
-    public MeshIndexFormat indexFormat;
+    // [Tooltip("How do you want your mesh to be chunked?")]
+    // public ChunkType chunkType;
+
+    [Tooltip("How many chunks do you want the mesh to split into (1 means it is only the single mesh)")]
+    public int chunks;
 
     [Space(10)]
 
@@ -25,7 +29,8 @@ public class PLGE_PlaneGenerator : MonoBehaviour
 
     [Space(10)]
 
-    [Tooltip("How many faces you want in your mesh in addition to the dimensions")]
+    [Tooltip("How many faces you want in your mesh in addition to the dimensions. Range is 1 - 50")]
+    [Range(1, 50)]
     public int meshResolution = 2;
 
     Vector3[] vertices;
@@ -34,11 +39,20 @@ public class PLGE_PlaneGenerator : MonoBehaviour
 
     public void GenerateMesh()
     {
+        GetComponent<MeshFilter>().mesh = mesh = new Mesh();
+        mesh.name = "PLGE_Plane";
+
+        // if(indexFormat == MeshIndexFormat.SixteenBit)
+        // {
+        //     mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt16;
+        // }
+        // else if(indexFormat == MeshIndexFormat.ThirtyTwoBit)
+        // {
+        //     mesh.indexFormat = UnityEngine.Rendering.IndexFormat.UInt32;
+        // }
+
         try
         {
-            GetComponent<MeshFilter>().mesh = mesh = new Mesh();
-            mesh.name = "PLGE_Plane";
-
             vertices = new Vector3[(numberOfFaces.x + 1) * (numberOfFaces.y + 1) * (meshResolution * meshResolution)];
             Vector2[] uv = new Vector2[vertices.Length];
 
