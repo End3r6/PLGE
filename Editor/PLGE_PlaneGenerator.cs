@@ -5,29 +5,16 @@ using System;
 using UnityEngine;
 using UnityEditor;
 
-// [RequireComponent(typeof(MeshRenderer))]
-// [RequireComponent(typeof(MeshFilter))]
 public class PLGE_PlaneGenerator : EditorWindow
 {
-    // public enum ChunkType
-    // {
-    //     Split,
-    //     Expand
-    // };
-
-    [Header("Mesh Options")]
-    // [Tooltip("How do you want your mesh to be chunked?")]
-    // public ChunkType chunkType;
-
     public int chunks = 1;
 
     public Vector2Int numberOfFaces = new Vector2Int(1, 1);
 
-    [Tooltip("How many faces you want in your mesh in addition to the dimensions. Range is 1 - 50")]
+    // [Tooltip("How many faces you want in your mesh in addition to the dimensions. Range is 1 - 50")]
     public int meshResolution = 10;
 
     GameObject waterGroup;
-
     Material mat;
 
     [MenuItem("Tools/Plague/Square Plane")]
