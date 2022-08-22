@@ -57,7 +57,7 @@ public class PLGE_PlaneGenerator : EditorWindow
 
         Mesh chunkMesh;
 
-        if((chunks / meshResolution) != 1)
+        if((chunks) != 1)
         {
             if((chunks + meshResolution) % 3 != 0)
             {
