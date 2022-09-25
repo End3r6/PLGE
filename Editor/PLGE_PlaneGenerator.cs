@@ -57,16 +57,6 @@ public class PLGE_PlaneGenerator : EditorWindow
 
         Mesh chunkMesh;
 
-        if((chunks) != 1)
-        {
-            if((chunks + meshResolution) % 3 != 0)
-            {
-                Debug.LogWarning("You can't split the mesh into that many chunks with the current resolution");
-
-                return;
-            }   
-        }
-
         try
         {
             for (int x = 0; x < chunks; x++)
@@ -75,7 +65,7 @@ public class PLGE_PlaneGenerator : EditorWindow
                 {
                     GameObject chunk = new GameObject($"Chunk {(z + chunks * x)}");
                     chunk.transform.parent = waterGroup.transform;
-                    chunk.transform.position = new Vector3(x * (numberOfFaces.x / chunks), 0, z * (numberOfFaces.y / chunks)) - new Vector3(numberOfFaces.x / 2, 0, numberOfFaces.y / 2);
+                    chunk.transform.position = new Vector3(x * (numberOfFaces.x / chunks) * chunks, 0, z * (numberOfFaces.y / chunks) * chunks) - new Vector3(numberOfFaces.x / 2, 0, numberOfFaces.y / 2);
 
                     chunk.AddComponent<MeshRenderer>();
                     chunk.AddComponent<MeshFilter>();
@@ -108,25 +98,25 @@ public class PLGE_PlaneGenerator : EditorWindow
         Vector2[] uv = new Vector2[vertices.Length];
         Vector4[] tangents = new Vector4[vertices.Length];
         Vector4 tangent = new Vector4(1f, 0f, 0f, -1f);
-        for (int i = 0, z = 0; z <= meshResolution / chunks; z++) 
+        for (int i = 0, z = 0; z <= meshResolution; z++) 
         {
-            for (int x = 0; x <= meshResolution / chunks; x++, i++) 
+            for (int x = 0; x <= meshResolution; x++, i++) 
             {
-                vertices[i] = (new Vector3(x * numberOfFaces.x / (meshResolution), 0, z * numberOfFaces.y / (meshResolution)))/*  - new Vector3(numberOfFaces.x / 2, 0, numberOfFaces.y / 2) */;
+                vertices[i] = (new Vector3(x * numberOfFaces.x / (meshResolution), 0, z * numberOfFaces.y / (meshResolution))) /* - new Vector3((numberOfFaces.x / 2), 0, (numberOfFaces.y / 2)) */;
                 uv[i] = new Vector2((float)x, (float)z) / meshResolution;
                 tangents[i] = tangent;
             }
         }
         
-        int[] triangles = new int[(meshResolution * meshResolution * 6) / chunks];
-        for (int ti = 0, vi = 0, y = 0; y < meshResolution / chunks; y++, vi++) 
+        int[] triangles = new int[(meshResolution * meshResolution * 6)];
+        for (int ti = 0, vi = 0, y = 0; y < meshResolution; y++, vi++) 
         {
-            for (int x = 0; x < meshResolution / chunks; x++, ti += 6, vi++) 
+            for (int x = 0; x < meshResolution; x++, ti += 6, vi++) 
             {
                 triangles[ti] = vi;
                 triangles[ti + 3] = triangles[ti + 2] = vi + 1;
-                triangles[ti + 4] = triangles[ti + 1] = vi + (meshResolution / chunks) + 1;
-                triangles[ti + 5] = vi + (meshResolution / chunks) + 2;
+                triangles[ti + 4] = triangles[ti + 1] = vi + (meshResolution) + 1;
+                triangles[ti + 5] = vi + (meshResolution) + 2;
             }
         }
 
