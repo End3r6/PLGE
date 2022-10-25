@@ -1,7 +1,7 @@
 # PLaGeU
 Plane Generation Stuff For Unity
 
-# ?
+# What
 This provides users the ability to quickly generate planes of any dimension and resolution.
 
 # Why
